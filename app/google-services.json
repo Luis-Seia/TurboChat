@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "118464505603",
+    "project_id": "turbo-chat-bbe28",
+    "storage_bucket": "turbo-chat-bbe28.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:118464505603:android:94ebd92411753ade5aab36",
+        "android_client_info": {
+          "package_name": "mz.ac.isutc.lecc31.turbochat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "118464505603-vo6igfiqdmaq6ltndaaam3c71idrc0t9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mz.ac.isutc.lecc31.turbochat",
+            "certificate_hash": "c8fa6fb964a7b6f63550f363e185f78db0903823"
+          }
+        },
+        {
+          "client_id": "118464505603-7qp55ku2a1inhlgclmmlk91genvrbg82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUMkpvu4o4FbEsRTWTLSdKjauc9Z7yyUI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "118464505603-7qp55ku2a1inhlgclmmlk91genvrbg82.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
