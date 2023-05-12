@@ -1,8 +1,10 @@
 package mz.ac.isutc.lecc31.turbochat.helper;
 
 import android.net.Uri;
-import android.support.annotation.NonNull;
+
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
