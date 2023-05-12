@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import mz.ac.isutc.lecc31.turbochat.R;
 import mz.ac.isutc.lecc31.turbochat.databinding.ActivityCadastroBinding;
 import mz.ac.isutc.lecc31.turbochat.helper.Base64Custom;
+import mz.ac.isutc.lecc31.turbochat.helper.UsuarioFirebase;
 import mz.ac.isutc.lecc31.turbochat.model.User;
 import mz.ac.isutc.lecc31.turbochat.repository.ConfigFirebase;
 
@@ -71,34 +72,56 @@ public class CadastroActivity extends AppCompatActivity {
 
     public void saveUser(User user){
         auth = ConfigFirebase.getAuth();
-        auth.createUserWithEmailAndPassword(user.getEmail(), user.getSenha()).addOnCompleteListener(CadastroActivity.this, new OnCompleteListener<AuthResult>() {
+        auth.createUserWithEmailAndPassword(
+                user.getEmail(), user.getSenha()
+        ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if( task.isSuccessful()){
-                    String idUser = Base64Custom.codificarBase64(user.getEmail());
-                    user.setIdUser(idUser);
-                    user.saveFromFirebase();
 
-                    startActivity(new Intent(CadastroActivity.this, MasterActivity.class));
+                if ( task.isSuccessful() ){
+
+                    Toast.makeText(CadastroActivity.this,
+                            "Sucesso ao cadastrar usuário!",
+                            Toast.LENGTH_SHORT).show();
+                    UsuarioFirebase.atualizarNomeUsuario( user.getNome() );
                     finish();
-                }else{
-                    String textExcecao = "";
+
                     try {
-                        throw task.getException();
-                    }catch (FirebaseAuthWeakPasswordException e){
-                        textExcecao = "digite uma senha mais forte";
-                    }catch (FirebaseAuthInvalidCredentialsException e){
-                        textExcecao = "digite um email valido";
-                    }catch (FirebaseAuthUserCollisionException e){
-                        textExcecao = "Esta conta ja foi cadastrada";
-                    } catch (Exception e) {
-                        textExcecao = "Erro ao cadastrar usuario";
+
+                        String identificadorUsuario = Base64Custom.codificarBase64( user.getEmail() );
+                        user.setId( identificadorUsuario );
+                        user.salvar();
+
+                    }catch (Exception e){
                         e.printStackTrace();
                     }
-                    Toast.makeText(CadastroActivity.this, textExcecao, Toast.LENGTH_SHORT).show();
+
+                }else {
+
+                    String excecao = "";
+                    try {
+                        throw task.getException();
+                    }catch ( FirebaseAuthWeakPasswordException e){
+                        excecao = "Digite uma senha mais forte!";
+                    }catch ( FirebaseAuthInvalidCredentialsException e){
+                        excecao= "Por favor, digite um e-mail válido";
+                    }catch ( FirebaseAuthUserCollisionException e){
+                        excecao = "Este conta já foi cadastrada";
+                    }catch (Exception e){
+                        excecao = "Erro ao cadastrar usuário: "  + e.getMessage();
+                        e.printStackTrace();
+                    }
+
+                    Toast.makeText(CadastroActivity.this,
+                            excecao,
+                            Toast.LENGTH_SHORT).show();
+
                 }
+
             }
         });
+
     }
+
 
 }

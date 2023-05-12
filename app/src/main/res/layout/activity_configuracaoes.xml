@@ -19,13 +19,35 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
         android:layout_marginTop="150dp"
         android:src="@drawable/padrao"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
         tools:ignore="ImageContrastCheck" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageButtonGaleria"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="160dp"
+            android:contentDescription="@string/imagem"
+            app:srcCompat="@drawable/ic_baseline_insert_photo_24" />
+
+        <ImageButton
+            android:id="@+id/imageButtonCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@drawable/ic_baseline_camera_enhance_24"
+           />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/editTextTextPersonName"
@@ -35,6 +57,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="Name" />
+        android:text="@string/name"
+        android:autofillHints="" />
 
 </LinearLayout>

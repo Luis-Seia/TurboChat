@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -15,9 +20,16 @@
         android:theme="@style/Theme.TurboChat"
         tools:targetApi="31">
         <activity
-            android:parentActivityName=".view.MasterActivity"
-            android:name=".view.ConfiguracaoesActivity"
+            android:name=".view.ChatActivity"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".view.ConfiguracaoesActivity"
+            android:exported="false"
+            android:parentActivityName=".view.MasterActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
