@@ -2,6 +2,7 @@ package mz.ac.isutc.lecc31.turbochat.model;
 
 
 
+
 public class Mensagem {
 
     private String idUsuario;
@@ -19,9 +20,11 @@ public class Mensagem {
         this.idUsuario = idUsuario;
     }
 
+
     public String getMensagem() {
         return mensagem;
     }
+
 
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
@@ -33,5 +36,6 @@ public class Mensagem {
 
     public void setImagem(String imagem) {
         this.imagem = imagem;
+
     }
 }

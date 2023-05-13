@@ -1,5 +1,4 @@
 package mz.ac.isutc.lecc31.turbochat.model;
-
 import com.google.firebase.database.DatabaseReference;
 
 import mz.ac.isutc.lecc31.turbochat.repository.ConfigFirebase;
@@ -57,5 +56,6 @@ public class Conversa {
     public void setUltimaMensagem(String ultimaMensagem) {
         this.ultimaMensagem = ultimaMensagem;
     }
+
 
 }
