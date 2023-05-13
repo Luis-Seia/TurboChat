@@ -75,5 +75,6 @@ public class ConversasAdapter extends RecyclerView.Adapter<ConversasAdapter.MyVi
 
         }
     }
+    }
 
-}
+

@@ -8,7 +8,7 @@
     android:padding="5dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageViewFotoContatoConversa"
+        android:id="@+id/imageViewFotoContato"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/padrao"
@@ -22,7 +22,7 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/textNomeContatoConversa"
+            android:id="@+id/textNomeContato"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nome"
@@ -30,7 +30,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textLastMensagem"
+            android:id="@+id/textEmailContato"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="email" />
