@@ -14,7 +14,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerMensagens"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1" />
 
     <LinearLayout
@@ -27,7 +27,7 @@
         android:paddingBottom="6dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginBottom="3dp"
             android:layout_marginEnd="6dp"
@@ -51,14 +51,15 @@
                 android:hint="@string/app_name"
                 android:importantForAutofill="no"
                 android:inputType="textPersonName"
-                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+                android:textColorHint="#757575"
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
             <ImageView
                 android:id="@+id/imageCamera"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                app:srcCompat="@drawable/ic_baseline_camera_alt_24"
-                android:contentDescription="TODO" />
+                app:srcCompat="@drawable/ic_baseline_camera_enhance_24"
+                tools:ignore="ContentDescription" />
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -70,7 +71,8 @@
             android:onClick="enviarMensagem"
             app:backgroundTint="@color/purple_700"
             app:fabSize="mini"
-            app:srcCompat="@drawable/ic_enviar_branco_24dp" />
+            app:srcCompat="@drawable/ic_enviar_branco_24dp"
+            android:focusable="true" />
     </LinearLayout>
 
 </LinearLayout>

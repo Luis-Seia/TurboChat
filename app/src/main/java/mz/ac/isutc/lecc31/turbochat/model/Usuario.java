@@ -3,28 +3,29 @@ package mz.ac.isutc.lecc31.turbochat.model;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import mz.ac.isutc.lecc31.turbochat.helper.UsuarioFirebase;
 import mz.ac.isutc.lecc31.turbochat.repository.ConfigFirebase;
 
-public class User {
+public class Usuario implements Serializable {
     private String id;
     private String nome;
     private String email;
     private String senha;
     private String foto;
 
-    public User() {
+    public Usuario() {
     }
 
-    public User(String email, String senha) {
+    public Usuario(String email, String senha) {
         this.email = email;
         this.senha = senha;
     }
 
-    public User(String nome, String email, String senha) {
+    public Usuario(String nome, String email, String senha) {
         this.email = email;
         this.senha = senha;
         this.nome = nome;
