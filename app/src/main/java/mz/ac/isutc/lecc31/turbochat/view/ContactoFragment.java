@@ -117,8 +117,6 @@ public class ContactoFragment extends Fragment {
                     if ( !emailUsuarioAtual.equals( usuario.getEmail() ) ){
                         listaContatos.add( usuario );
                     }
-
-
                 }
 
                 adapter.notifyDataSetChanged();
