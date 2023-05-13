@@ -3,7 +3,6 @@ package mz.ac.isutc.lecc31.turbochat.view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,15 +15,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
-import mz.ac.isutc.lecc31.turbochat.R;
 import mz.ac.isutc.lecc31.turbochat.databinding.ActivityLoginBinding;
-import mz.ac.isutc.lecc31.turbochat.model.User;
+import mz.ac.isutc.lecc31.turbochat.model.Usuario;
 import mz.ac.isutc.lecc31.turbochat.repository.ConfigFirebase;
 
 public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
     private FirebaseAuth auth;
-    private User user;
+    private Usuario usuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +35,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!binding.editLoginEmail.getText().toString().isEmpty()) {
                     if (!binding.editLoginSenha.getText().toString().isEmpty()) {
-                        user = new User(binding.editLoginEmail.getText().toString(), binding.editLoginSenha.getText().toString());
-                        validateUser(user);
+                        usuario = new Usuario(binding.editLoginEmail.getText().toString(), binding.editLoginSenha.getText().toString());
+                        validateUser(usuario);
                     } else {
                         Toast.makeText(LoginActivity.this, "preencha o email", Toast.LENGTH_SHORT).show();
                     }
@@ -57,10 +55,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void validateUser(User user) {
+    public void validateUser(Usuario usuario) {
         binding.progressBar.setVisibility(View.VISIBLE);
         auth = ConfigFirebase.getAuth();
-        auth.signInWithEmailAndPassword(user.getEmail(), user.getSenha())
+        auth.signInWithEmailAndPassword(usuario.getEmail(), usuario.getSenha())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

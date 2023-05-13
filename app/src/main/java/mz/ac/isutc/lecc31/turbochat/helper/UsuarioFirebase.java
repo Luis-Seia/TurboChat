@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-import mz.ac.isutc.lecc31.turbochat.model.User;
+import mz.ac.isutc.lecc31.turbochat.model.Usuario;
 import mz.ac.isutc.lecc31.turbochat.repository.ConfigFirebase;
 
 
@@ -79,11 +79,11 @@ public class UsuarioFirebase {
 
     }
 
-    public static User getDadosUsuarioLogado(){
+    public static Usuario getDadosUsuarioLogado(){
 
         FirebaseUser firebaseUser = getUsuarioAtual();
 
-        User usuario = new User();
+        Usuario usuario = new Usuario();
         usuario.setEmail( firebaseUser.getEmail() );
         usuario.setNome( firebaseUser.getDisplayName() );
 

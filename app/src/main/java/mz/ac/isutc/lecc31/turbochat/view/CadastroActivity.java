@@ -16,16 +16,15 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
-import mz.ac.isutc.lecc31.turbochat.R;
 import mz.ac.isutc.lecc31.turbochat.databinding.ActivityCadastroBinding;
 import mz.ac.isutc.lecc31.turbochat.helper.Base64Custom;
 import mz.ac.isutc.lecc31.turbochat.helper.UsuarioFirebase;
-import mz.ac.isutc.lecc31.turbochat.model.User;
+import mz.ac.isutc.lecc31.turbochat.model.Usuario;
 import mz.ac.isutc.lecc31.turbochat.repository.ConfigFirebase;
 
 public class CadastroActivity extends AppCompatActivity {
     ActivityCadastroBinding binding;
-    private User user;
+    private Usuario usuario;
     private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +36,8 @@ public class CadastroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(validationFields()){
-                    user = new User(binding.editNomeRegistar.getText().toString(), binding.editEmailRegistar.getText().toString(), binding.editSenhaRegistar.getText().toString());
-                    saveUser(user);
+                    usuario = new Usuario(binding.editNomeRegistar.getText().toString(), binding.editEmailRegistar.getText().toString(), binding.editSenhaRegistar.getText().toString());
+                    saveUser(usuario);
                 }
             }
         });
@@ -70,10 +69,10 @@ public class CadastroActivity extends AppCompatActivity {
         return validation;
     }
 
-    public void saveUser(User user){
+    public void saveUser(Usuario usuario){
         auth = ConfigFirebase.getAuth();
         auth.createUserWithEmailAndPassword(
-                user.getEmail(), user.getSenha()
+                usuario.getEmail(), usuario.getSenha()
         ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -83,14 +82,14 @@ public class CadastroActivity extends AppCompatActivity {
                     Toast.makeText(CadastroActivity.this,
                             "Sucesso ao cadastrar usuário!",
                             Toast.LENGTH_SHORT).show();
-                    UsuarioFirebase.atualizarNomeUsuario( user.getNome() );
+                    UsuarioFirebase.atualizarNomeUsuario( usuario.getNome() );
                     finish();
 
                     try {
 
-                        String identificadorUsuario = Base64Custom.codificarBase64( user.getEmail() );
-                        user.setId( identificadorUsuario );
-                        user.salvar();
+                        String identificadorUsuario = Base64Custom.codificarBase64( usuario.getEmail() );
+                        usuario.setId( identificadorUsuario );
+                        usuario.salvar();
 
                     }catch (Exception e){
                         e.printStackTrace();

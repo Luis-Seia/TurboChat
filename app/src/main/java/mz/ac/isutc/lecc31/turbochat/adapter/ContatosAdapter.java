@@ -17,15 +17,15 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mz.ac.isutc.lecc31.turbochat.R;
-import mz.ac.isutc.lecc31.turbochat.model.User;
+import mz.ac.isutc.lecc31.turbochat.model.Usuario;
 
 
 public class ContatosAdapter extends RecyclerView.Adapter<ContatosAdapter.MyViewHolder> {
 
-    private List<User> contatos;
+    private List<Usuario> contatos;
     private Context context;
 
-    public ContatosAdapter(List<User> listaContatos, Context c) {
+    public ContatosAdapter(List<Usuario> listaContatos, Context c) {
         this.contatos = listaContatos;
         this.context = c;
     }
@@ -39,7 +39,7 @@ public class ContatosAdapter extends RecyclerView.Adapter<ContatosAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        User usuario = contatos.get( position );
+        Usuario usuario = contatos.get( position );
 
         holder.nome.setText( usuario.getNome() );
         holder.email.setText( usuario.getEmail() );

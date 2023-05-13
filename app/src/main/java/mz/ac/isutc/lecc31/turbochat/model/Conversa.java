@@ -1,33 +1,61 @@
 package mz.ac.isutc.lecc31.turbochat.model;
+import com.google.firebase.database.DatabaseReference;
 
-import java.util.ArrayList;
+import mz.ac.isutc.lecc31.turbochat.repository.ConfigFirebase;
+
 
 public class Conversa {
-    private User amigo;//amigo sera a pessoa com quem o usuario esta a conversar
-    private ArrayList<Mensagem> mensagens;
 
-    public Conversa(User amigo, ArrayList<Mensagem> mensagems) {
-        this.amigo = amigo;
-        this.mensagens = mensagems;
+    private String idRemetente;
+    private String idDestinatario;
+    private String ultimaMensagem;
+    private Usuario usuarioExibicao;
+
+    public Conversa() {
     }
 
-    public User getAmigo() {
-        return amigo;
+    public void salvar(){
+
+        DatabaseReference database = ConfigFirebase.getFirebaseDataBase();
+        DatabaseReference conversaRef = database.child("conversas");
+
+        conversaRef.child( this.getIdRemetente() )
+                .child( this.getIdDestinatario() )
+                .setValue( this );
+
     }
 
-    public void setAmigo(User amigo) {
-        this.amigo = amigo;
+    public Usuario getUsuarioExibicao() {
+        return usuarioExibicao;
     }
 
-    public ArrayList<Mensagem> getMensagens() {
-        return mensagens;
+    public void setUsuarioExibicao(Usuario usuarioExibicao) {
+        this.usuarioExibicao = usuarioExibicao;
     }
 
-    public void setMensagens(ArrayList<Mensagem> mensagens) {
-        this.mensagens = mensagens;
+    public String getIdRemetente() {
+        return idRemetente;
     }
 
-    public Mensagem getLastMensagem(){
-        return this.mensagens.get(mensagens.size()-1);
+    public void setIdRemetente(String idRemetente) {
+        this.idRemetente = idRemetente;
     }
+
+    public String getIdDestinatario() {
+        return idDestinatario;
+    }
+
+    public void setIdDestinatario(String idDestinatario) {
+        this.idDestinatario = idDestinatario;
+    }
+
+    public String getUltimaMensagem() {
+        return ultimaMensagem;
+    }
+
+    public void setUltimaMensagem(String ultimaMensagem) {
+        this.ultimaMensagem = ultimaMensagem;
+    }
+
+
 }

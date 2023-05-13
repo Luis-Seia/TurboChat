@@ -3,6 +3,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="name">Name</string>
-    <string name="imagem">Imagem</string>
+    <string name="imagembx">Imagem</string>
+    <string name="imagem_camera">abrir</string>
     <string name="txt">txt</string>
+    <string name="seagate_music">Seagate Music</string>
 </resources>

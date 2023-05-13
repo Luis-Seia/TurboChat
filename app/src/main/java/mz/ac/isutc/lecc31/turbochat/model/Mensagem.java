@@ -1,31 +1,41 @@
 package mz.ac.isutc.lecc31.turbochat.model;
 
-import java.util.Date;
+
+
 
 public class Mensagem {
-    private String mensagem, hora;
-    private User remetente;//sera a pessoa que envia a mensagem;
 
+    private String idUsuario;
+    private String mensagem;
+    private String imagem;
 
-    public Mensagem(String mensagem,User remetente) {
-        this.mensagem = mensagem;
-        this.remetente = remetente;
-        Date d = new Date();
-        this.hora = d.getHours()+":"+d.getMinutes();
+    public Mensagem() {
     }
 
-    //Nao criei setters porque mensagens uma vez criadas nao sao alteradas
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
 
     public String getMensagem() {
         return mensagem;
     }
 
-    public String getHora() {
-        return hora;
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
 
-    public User getRemetente() {
-        return remetente;
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+
     }
 }

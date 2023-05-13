@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import mz.ac.isutc.lecc31.turbochat.R;
 import mz.ac.isutc.lecc31.turbochat.adapter.ViewPagerAdapter;
+import mz.ac.isutc.lecc31.turbochat.databinding.ActivityLoginBinding;
 import mz.ac.isutc.lecc31.turbochat.databinding.ActivityMasterBinding;
 
 public class MasterActivity extends AppCompatActivity {
@@ -37,7 +38,6 @@ public class MasterActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbarPrincipal);
         toolbar.setTitle("Turbochat");
         setSupportActionBar(toolbar);
-
 
         viewPager = findViewById(R.id.viewpager);
 
@@ -82,7 +82,8 @@ public class MasterActivity extends AppCompatActivity {
     public void deslogarUsuario(){
 
         try {
-            autenticacao.signOut();
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(this, ActivityLoginBinding.class));
         }catch (Exception e){
             e.printStackTrace();
         }

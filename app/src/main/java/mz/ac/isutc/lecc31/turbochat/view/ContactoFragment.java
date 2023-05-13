@@ -1,8 +1,8 @@
 package mz.ac.isutc.lecc31.turbochat.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,23 +22,23 @@ import java.util.ArrayList;
 
 import mz.ac.isutc.lecc31.turbochat.R;
 import mz.ac.isutc.lecc31.turbochat.adapter.ContatosAdapter;
-import mz.ac.isutc.lecc31.turbochat.model.User;
+import mz.ac.isutc.lecc31.turbochat.helper.RecyclerItemClickListener;
+import mz.ac.isutc.lecc31.turbochat.helper.UsuarioFirebase;
+import mz.ac.isutc.lecc31.turbochat.model.Usuario;
 import mz.ac.isutc.lecc31.turbochat.repository.ConfigFirebase;
 
 
 public class ContactoFragment extends Fragment {
     private RecyclerView recyclerViewListaContatos;
     private ContatosAdapter adapter;
-    private ArrayList<User> listaContatos = new ArrayList<>();
+    private ArrayList<Usuario> listaContatos = new ArrayList<>();
     private DatabaseReference usuariosRef;
     private ValueEventListener valueEventListenerContatos;
-
+    private FirebaseUser usuarioAtual;
 
     public ContactoFragment() {
         // Required empty public constructor
     }
-
-
 
 
     @Override
@@ -48,7 +50,7 @@ public class ContactoFragment extends Fragment {
         //Configurações iniciais
         recyclerViewListaContatos = view.findViewById(R.id.recyclerViewListaContatos);
         usuariosRef = ConfigFirebase.getFirebaseDataBase().child("usuarios");
-
+        usuarioAtual = UsuarioFirebase.getUsuarioAtual();
 
         //configurar adapter
         adapter = new ContatosAdapter(listaContatos, getActivity() );
@@ -58,6 +60,35 @@ public class ContactoFragment extends Fragment {
         recyclerViewListaContatos.setLayoutManager( layoutManager );
         recyclerViewListaContatos.setHasFixedSize( true );
         recyclerViewListaContatos.setAdapter( adapter );
+
+        //Configurar evento de clique no recyclerview
+        recyclerViewListaContatos.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        getActivity(),
+                        recyclerViewListaContatos,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+
+                                Usuario usuarioSelecionado = listaContatos.get( position );
+                                Intent i = new Intent(getActivity(), ChatActivity.class);
+                                i.putExtra("chatContato", usuarioSelecionado );
+                                startActivity( i );
+
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            }
+                        }
+                )
+        );
 
         return view;
     }
@@ -79,11 +110,14 @@ public class ContactoFragment extends Fragment {
         valueEventListenerContatos = usuariosRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 for ( DataSnapshot dados: dataSnapshot.getChildren() ){
+                    listaContatos.clear();
+                    Usuario usuario = dados.getValue( Usuario.class );
+                    String emailUsuarioAtual = usuarioAtual.getEmail();
+                    if ( !emailUsuarioAtual.equals( usuario.getEmail() ) ){
+                        listaContatos.add( usuario );
+                    }
 
-                    User usuario = dados.getValue( User.class );
-                    listaContatos.add( usuario );
 
                 }
 
