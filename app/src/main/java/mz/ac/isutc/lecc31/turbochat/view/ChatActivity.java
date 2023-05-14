@@ -185,6 +185,7 @@ public class ChatActivity extends AppCompatActivity {
 
                                      salvarMensagem(idUsuarioRemetente,idUsuarioDestinatario,mensagem);
                                      salvarMensagem(idUsuarioDestinatario, idUsuarioRemetente, mensagem);
+                                     salvarConversa(mensagem);
                                  }
                              });
                         }
