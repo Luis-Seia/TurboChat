@@ -3,6 +3,7 @@ package mz.ac.isutc.lecc31.turbochat.view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -47,6 +48,8 @@ public class ConfiguracaoesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracaoes);
+
+
 
         storageReference = ConfigFirebase.getFirebaseStorage();
         identificadorUsuario = UsuarioFirebase.getIdentificadorUsuario();
@@ -177,4 +180,5 @@ public class ConfiguracaoesActivity extends AppCompatActivity {
         dialog.show();
 
     }
+
 }

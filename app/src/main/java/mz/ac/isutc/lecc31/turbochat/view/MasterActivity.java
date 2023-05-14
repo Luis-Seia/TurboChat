@@ -1,17 +1,23 @@
 package mz.ac.isutc.lecc31.turbochat.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.Manifest;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+
 
 
 import mz.ac.isutc.lecc31.turbochat.R;
@@ -26,6 +32,7 @@ public class MasterActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private FirebaseAuth autenticacao;
     Toolbar toolbar;
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +79,12 @@ public class MasterActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.menuConfiguracoes:
-                startActivity(new Intent(this, ConfiguracaoesActivity.class));
+                if (isCameraPermitida()){
+                    startActivity(new Intent(this, ConfiguracaoesActivity.class));
+                }else{
+                    pedirPermissao();
+
+                }
                 break;
         }
 
@@ -88,5 +100,31 @@ public class MasterActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+    private boolean isCameraPermitida() {
+
+        int resultado = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        return resultado == PackageManager.PERMISSION_GRANTED;
+    }
+
+
+    private void pedirPermissao() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                CAMERA_PERMISSION_REQUEST_CODE);
+    }
+
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+
+                startActivity(new Intent(this, ConfiguracaoesActivity.class));
+            } else {
+
+            }
+        }
     }
 }

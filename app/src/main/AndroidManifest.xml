@@ -20,7 +20,7 @@
         android:theme="@style/Theme.TurboChat"
         tools:targetApi="31">
         <activity
-            android:name=".ConversasAdapter"
+            android:name=".adapter.ConversasAdapter"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
