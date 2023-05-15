@@ -26,14 +26,15 @@ public class MainActivity extends AppCompatActivity {
         binding.buttonCadastreSe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(MainActivity.this, CadastroActivity.class));
             }
         });
 
         binding.textViewtoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, CadastroActivity.class));
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+
             }
         });
     }
